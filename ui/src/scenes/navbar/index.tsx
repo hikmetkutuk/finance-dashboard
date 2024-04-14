@@ -1,12 +1,12 @@
+import React from "react";
 import FlexBetween from "@/components/FlexBetween";
 import PixIcon from "@mui/icons-material/Pix";
 import { Box, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 
-type Props = {};
-const Navbar = (props: Props) => {
+const Navbar = () => {
   const { palette } = useTheme();
-  const [selected, setSelected] = useTheme("dashboard");
+  const [selected, setSelected] = React.useState("dashboard");
   return (
     <FlexBetween mb="0.25rem" p="0.5rem 0rem" color={palette.grey[300]}>
       {/* LEFT */}
@@ -18,16 +18,19 @@ const Navbar = (props: Props) => {
       </FlexBetween>
       {/* RIGHT */}
       <FlexBetween gap="2rem">
-      <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
+        <Box sx={{ "&:hover": { color: palette.primary.main } }}>
           <Link
             to="/"
             onClick={() => setSelected("dashboard")}
             style={{
-              color: selected === "dashboard" ? "inherit" : palette.grey[700],
-              textDecoration: "inherit",
+              color:
+                selected === "dashboard"
+                  ? palette.primary.main
+                  : palette.grey[700],
+              textDecoration: "none",
             }}
           >
-            dashboard
+            Dashboard
           </Link>
         </Box>
         <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
@@ -35,15 +38,19 @@ const Navbar = (props: Props) => {
             to="/predictions"
             onClick={() => setSelected("predictions")}
             style={{
-              color: selected === "predictions" ? "inherit" : palette.grey[700],
-              textDecoration: "inherit",
+              color:
+                selected === "predictions"
+                  ? palette.primary.main
+                  : palette.grey[700],
+              textDecoration: "none",
             }}
           >
-            predictions
+            Predictions
           </Link>
         </Box>
       </FlexBetween>
     </FlexBetween>
   );
 };
+
 export default Navbar;
